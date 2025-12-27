@@ -64,9 +64,9 @@ sub update_manifest {
 
     # print $content;
 
-    # open my $out_fh, '>', $manifest_path or die "Could not open '$manifest_path' for writing: $!";
-    # print $out_fh $content;
-    # close $out_fh;
+    open my $out_fh, '>', $manifest_path or die "Could not open '$manifest_path' for writing: $!";
+    print $out_fh $content;
+    close $out_fh;
 }
 
 sub update_package_json {
@@ -83,9 +83,9 @@ sub update_package_json {
 
     # print $content;
 
-    # open my $out_fh, '>', $package_path or die "Could not open '$package_path' for writing: $!";
-    # print $out_fh $content;
-    # close $out_fh;
+    open my $out_fh, '>', $package_path or die "Could not open '$package_path' for writing: $!";
+    print $out_fh $content;
+    close $out_fh;
 }
 
 sub update_main_ts {
@@ -99,9 +99,9 @@ sub update_main_ts {
 
     # print $content;
 
-    # open my $out_fh, '>', $main_ts_path or die "Could not open '$main_ts_path' for writing: $!";
-    # print $out_fh $content;
-    # close $out_fh;
+    open my $out_fh, '>', $main_ts_path or die "Could not open '$main_ts_path' for writing: $!";
+    print $out_fh $content;
+    close $out_fh;
 }
 
 sub update_readme_md {
