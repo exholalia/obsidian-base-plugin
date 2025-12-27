@@ -2,6 +2,12 @@
 
 This is a plugin for Obsidian (https://obsidian.md).
 
+## Plugin Setup
+
+Run `perl name.pl` to update the plugin ID, names, and titles across the plugin structure.
+
+Default behaviour is to use the folder name as the plugin ID, but you can override it with `--id <plugin-id>`. You can add a description with `-d <description>`.
+
 ## Installation
 
 ### BRAT (Recommended)
