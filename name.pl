@@ -41,7 +41,8 @@ sub plugin_names {
     $plugin_id =~ s/-plugin$//;
 
     # Convert to PascalCase and Title Case
-    (my $pascal_case = $plugin_id) =~ s/^(\w)|-(\w)/\U$1/g;
+    (my $pascal_case = $plugin_id) =~ s/-(\w)/\U$1/g;
+    $pascal_case = ucfirst($pascal_case);
     (my $title_case = $pascal_case) =~ s/([a-z])([A-Z])/$1 $2/g;
     
     $names{'ts'} = $pascal_case . 'Plugin';
