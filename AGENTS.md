@@ -36,7 +36,7 @@ npm run build
 ## Linting
 
 - To use eslint install eslint from terminal: `npm install -g eslint`
-- To use eslint to analyze this project use this command: `eslint main.ts`
+- To use eslint to analyze this project use this command: `eslint src/main.ts`
 - eslint will then create a report with suggestions for code improvement by file and line number.
 - If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder: `eslint ./src/`
 
@@ -100,7 +100,25 @@ npm run build
 - Attach `manifest.json`, `main.js`, and `styles.css` (if present) to the release as individual assets.
 - After the initial release, follow the process to add/update your plugin in the community catalog as required.
 
-## Security, privacy, and compliance
+### Releasing new releases
+
+- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
+- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
+- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
+- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
+- Publish the release.
+
+> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
+> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+
+## Adding your plugin to the community plugin list
+
+- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
+- Publish an initial version.
+- Make sure you have a `README.md` file in the root of your repo.
+- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+
+### Security, privacy, and compliance
 
 Follow Obsidian's **Developer Policies** and **Plugin Guidelines**. In particular:
 
@@ -113,7 +131,7 @@ Follow Obsidian's **Developer Policies** and **Plugin Guidelines**. In particula
 - Avoid deceptive patterns, ads, or spammy notifications.
 - Register and clean up all DOM, app, and interval listeners using the provided `register*` helpers so the plugin unloads safely.
 
-## UX & copy guidelines (for UI text, commands, settings)
+### UX & copy guidelines (for UI text, commands, settings)
 
 - Prefer sentence case for headings, buttons, and titles.
 - Use clear, action-oriented imperatives in step-by-step copy.
@@ -121,14 +139,14 @@ Follow Obsidian's **Developer Policies** and **Plugin Guidelines**. In particula
 - Use arrow notation for navigation: **Settings → Community plugins**.
 - Keep in-app strings short, consistent, and free of jargon.
 
-## Performance
+### Performance
 
 - Keep startup light. Defer heavy work until needed.
 - Avoid long-running tasks during `onload`; use lazy initialization.
 - Batch disk access and avoid excessive vault scans.
 - Debounce/throttle expensive operations in response to file system events.
 
-## Coding conventions
+### Coding conventions
 
 - TypeScript with `"strict": true` preferred.
 - **Keep `main.ts` minimal**: Focus only on plugin lifecycle (onload, onunload, addCommand calls). Delegate all feature logic to separate modules.
@@ -138,7 +156,7 @@ Follow Obsidian's **Developer Policies** and **Plugin Guidelines**. In particula
 - Avoid Node/Electron APIs if you want mobile compatibility; set `isDesktopOnly` accordingly.
 - Prefer `async/await` over promise chains; handle errors gracefully.
 
-## Mobile
+### Mobile
 
 - Where feasible, test on iOS and Android.
 - Don't assume desktop-only behavior unless `isDesktopOnly` is `true`.
