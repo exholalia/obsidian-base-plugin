@@ -6,7 +6,8 @@ use feature 'say';
 use FindBin qw($Bin);
 use File::Basename;
 
-my $standard_description = "This is a plugin for Obsidian (https://obsidian.md).";
+my $template_description = "This is a plugin for Obsidian (https://obsidian.md).";
+my $template_id = 'obsidian-base-plugin';
 
 my %names;
 my $plugin_id = '';
@@ -121,7 +122,7 @@ sub update_readme_md {
             my $current_desc = $1;
             if ($current_desc eq $description) { # Skip if same
                 $content =~ s/(# $names{'title'}\s*\n\n)(.*?)(\n\n)/$1$description$3/s;
-            } elsif ($current_desc eq $standard_description) { # Replace standard description
+            } elsif ($current_desc eq $template_description) { # Replace standard description
                 $content =~ s/(# $names{'title'}\s*\n\n)(.*?)(\n\n)/$1$description$3/s;
             } else { # Prepend new description
                 $content =~ s/(# $names{'title'}\s*\n\n)/$1$description\n\n/s;
@@ -130,6 +131,9 @@ sub update_readme_md {
             $content =~ s/(# $names{'title'}\s*\n)/$1$description\n\n/;
         }
     }
+
+    # Update templated repository url if it exists
+    $content =~ s/$template_id/$names{'id'}/g;
 
     open my $out_fh, '>', $readme_path or die "Could not open '$readme_path' for writing: $!";
     print $out_fh $content;
